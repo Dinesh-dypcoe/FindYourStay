@@ -1,0 +1,168 @@
+<style>
+  .navbar {
+    display: flex;
+    justify-content: space-between; /* Space between navbar items */
+    align-items: center;
+  }
+
+  .navbar .search-container {
+    flex-grow: 1; /* Allow the search container to grow */
+    display: flex;
+    justify-content: center; /* Center the search bar */
+  }
+
+  .search-btn {
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+  }
+
+  .search-btn:hover {
+    background-color: #fe424d;
+    color: #fff;
+  }
+
+  .search-btn i {
+    display: inline;
+    margin-right: 0.5rem;
+  }
+
+  .search-input {
+    width: 308px;
+    border-radius: 25px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+    font-size: 1rem;
+  }
+
+  /* Additional Styles */
+  .nav-link {
+    text-decoration: none;
+    color: #333; /* Change link color if needed */
+  }
+
+  .dropdown {
+    position: relative; /* Set relative position for dropdown */
+  }
+
+  .dropdown-menu {
+    position: absolute; /* Absolute positioning */
+    top: 100%; /* Position below the button */
+    right: 0; /* Align dropdown to the right */
+    text-align: center;
+    min-width: 200px; /* Set a minimum width for dropdown items */
+    background-color: white; /* Background color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for better visibility */
+    z-index: 1000; /* Ensure it is above other content */
+    opacity: 0; /* Start hidden */
+    visibility: hidden; /* Make it invisible */
+    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
+  }
+
+  /* Show the dropdown when it has the 'show' class */
+  .dropdown-menu.show {
+    opacity: 1; /* Fully visible */
+    visibility: visible; /* Make it visible */
+  }
+
+  /* Flexbox for alignment */
+  .navbar-nav.ms-auto {
+    display: flex;
+    align-items: center; /* Vertically align items */
+  }
+
+  /* Add some margin between the 'List at FindYourStay' link and the account menu */
+  .nav-link {
+    margin-right: 1rem;
+  }
+
+  .account-menu {
+    position: relative; /* Change to relative to ensure it aligns properly */
+    margin-left: auto; /* Push it to the far right */
+  }
+
+  .account-menu .btn {
+    margin-top: 0.5rem;
+  }
+
+  /* Media Query to keep account menu visible on small screens */
+  @media (max-width: 992px) {
+    .account-menu {
+      display: block !important; /* Ensure it stays visible */
+      position: fixed; /* Fixed positioning for constant visibility */
+      top: 10px; /* Adjust top position if necessary */
+      right: 10px; /* Keep it aligned to the right */
+      z-index: 1000; /* Keep it above other content */
+    }
+
+    .navbar {
+      justify-content: space-between; /* Maintain spacing on small screens */
+    }
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-house-crack"></i></a>
+    
+    <!-- Hamburger Icon -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link" href="/listings">Explore</a>
+      </div>
+
+      <!-- Centering the search bar -->
+      <div class="search-container">
+        <form class="d-flex" role="search" action="/listings/search" method="GET">
+            <input class="form-control me-2 search-input" type="search" placeholder="Search by Country or Title" name="query">
+            <button class="btn search-btn" type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>Search
+            </button>
+        </form>
+    </div>
+          
+
+      <div class="navbar-nav ms-auto">
+        <a class="nav-link" href="/listings/new">List at FindYourStay</a>
+      </div>
+
+      <!-- Dropdown menu stays in top-right corner without overlap -->
+      <div class="account-menu">
+        <div class="dropdown">
+          <button class="btn btn-secondary hamburger-menu" id="hamburgerMenuButton" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-user" id="hamburgerMenuButton"></i> <!-- User icon -->
+          </button>
+          <div class="dropdown-menu" id="hamburgerDropdown">
+            <a class="nav-link dropdown-item" aria-current="page" href=""><b><i class="fa-solid fa-user"></i> My Account</b></a>
+            <% if (!currUser) { %>
+              <a class="nav-link dropdown-item" aria-current="page" href="/signup"><b> Sign Up</b></a>
+              <a class="nav-link dropdown-item" href="/login"><b>Log In</b></a>
+            <% } else { %>
+              <a class="nav-link dropdown-item" href="/logout"><b>Log Out</b></a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Toggle the hamburger menu on click
+  document.getElementById('hamburgerMenuButton').addEventListener('click', function() {
+    const dropdown = document.getElementById('hamburgerDropdown');
+    dropdown.classList.toggle('show'); // Toggle visibility
+  });
+
+  // Optional: Close the menu when clicking outside
+  window.addEventListener('click', function(event) {
+    const dropdown = document.getElementById('hamburgerDropdown');
+    if (!event.target.matches('#hamburgerMenuButton') && !dropdown.contains(event.target)) {
+      dropdown.classList.remove('show');
+    }
+  });
+</script>

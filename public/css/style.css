@@ -1,0 +1,439 @@
+/* Default Styles */
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #ffffff;
+    color: #000000;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar {
+    height: 5rem;
+    background-color: white;
+}
+
+.fa-house-crack {
+    color: #fe424d;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important; 
+}
+
+/* Footer */
+.f-info-links a {
+    text-decoration: none;
+    color: #222222 !important;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links, .f-info-socials, .f-info-brand {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    display: flex;
+    background-color: #ebebeb;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Cards */
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400 !important;
+}
+
+.listing-link {
+    text-decoration: none !important;
+}
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.2;
+    background-color: white;
+}
+
+/* Ensure cards have a margin */
+.card {
+    margin-bottom: 2rem;
+}
+
+.row {
+    margin: 0;
+}
+
+.col {
+    padding: 0.5rem;
+}
+
+.card {
+    border: none !important;
+    box-shadow: none;
+}
+
+.add-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+/* review card */
+
+.review-card{
+    min-height: 250px;
+    margin-left: 2rem;
+    margin-right: 2rem;
+}
+
+/* Specific to Show Page */
+.show-img {
+    width: 100%;
+    max-width: 600px;
+    max-height: 400px;
+    height: auto;
+    border-radius: 1.5rem !important;
+    object-fit: cover;
+    margin-bottom: 1rem;
+}
+
+.rounded-img {
+    border-radius: 1.5rem;
+}
+
+/* Button Group */
+.btn-group {
+    margin-right: 2rem;
+    white-space: nowrap;
+    display: flex;
+    gap: 2rem;
+}
+.custom-gap{
+    margin-right: 2rem;
+}
+
+/* .btn-group .btn {
+    margin: 0;
+} */
+
+/* Search Results */
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.listing-result {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.listing-result:last-child {
+    border-bottom: none;
+}
+
+.search-results p {
+    margin: 0;
+}
+
+/* Map */
+#map {
+    width: 100%;  /* Full width */
+    height: 400px; /* Set a specific height */
+    border: 1px solid #ccc; /* Optional: add a border to see the map area */
+}
+.map-container {
+    width: 100%;
+    height: 500px; /* or any height that fits your layout */
+}
+
+.ol-popup {
+    position: absolute;
+    background: white;
+    border: 1px solid #cccccc;
+    padding: 15px;
+    bottom: 12px;
+    left: -50%;
+    min-width: 200px;
+}
+
+.ol-popup-closer {
+    position: absolute;
+    top: 2px;
+    right: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+    background: #000;
+    padding: 2px 5px;
+}
+
+.ol-popup-closer:hover {
+    background: red;
+}
+
+
+/* Default (light) theme */
+body {
+    background-color: #ffffff;
+    color: #000000;
+}
+
+/* Dark theme */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.card.dark-mode {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.filter.dark-mode i,
+.filter.dark-mode p {
+    color: #ffffff;
+}
+
+.tax-toggle.dark-mode {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+/* Search Button */
+.search-btn {
+    background-color: #fe424d;
+    color: #fff;
+    border-radius: 25px;
+    padding: 0 1rem;
+}
+
+.search-btn:hover {
+    background-color: #fe424d;
+    color: #fff;
+}
+
+.search-btn i {
+    display: inline;
+    margin-right: 0.5rem;
+}
+
+.search-input {
+    border-radius: 25px;
+    padding: 0.5rem 3rem;
+    font-size: 1rem;
+}
+
+/* Filters Container */
+#filters-container {
+    overflow-x: auto; /* Enable horizontal scrolling */
+    white-space: nowrap; /* Prevent wrapping of filters */
+    margin-bottom: 1rem; /* Add some space below the filters */
+    scroll-behavior: smooth; /* Smooth scrolling */
+    padding: 0 1rem; /* Add padding to avoid cutting off content */
+    /* Removed scrollbar styles */
+}
+
+/* Filters */
+#filters {
+    display: flex;
+    flex-wrap: nowrap; /* Keep all filters in one line */
+    padding-top: 1rem; /* Add space between the icons and the header */
+}
+
+/* Individual Filter Item */
+.filter {
+    flex: 0 0 auto; /* Ensure filters do not shrink */
+    margin-right: 2rem; /* Space between filters (for larger screens) */
+    text-align: center;
+    opacity: 0.7;
+    scroll-snap-align: start; /* Ensure filters snap into view */
+}
+
+.filter:hover {
+    opacity: 1; /* Full opacity on hover */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+.filter p {
+    font-size: 0.8rem; /* Font size for text */
+}
+
+/* Icon styling */
+.filter i {
+    font-size: 1.5rem; /* Increase icon size */
+    color: #555555; /* Set icon color to grey */
+}
+
+/* Filter Link */
+.filter-link {
+    text-decoration: none; /* Remove text decoration from anchor links */
+    color: #000000; /* Set color of text (adjust if needed) */
+}
+
+/* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+#filters-container::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+/* Hide scrollbar for Firefox */
+#filters-container {
+    scrollbar-width: none; /* Hide scrollbar in Firefox */
+}
+
+
+/* Small Screens */
+@media (max-width: 576px) {
+    #filters-container {
+        overflow-y: hidden; /* Prevent vertical scrolling */
+        height: auto; /* Adjust height as needed */
+    }
+    
+    #filters {
+        flex-direction: row; /* Keep filters in a single line */
+    }
+
+    .filter {
+        margin-right: 0.5rem; /* Adjust spacing for small screens */
+    }
+}
+
+/* Medium to Large Screens (Tablets and Laptops) */
+@media (min-width: 768px) {
+    .filter {
+        margin-right: 1.5rem; /* Medium screens spacing */
+    }
+}
+
+@media (min-width: 992px) {
+    .filter {
+        margin-right: 4.1rem; /* Large screens spacing */
+    }
+}
+
+/* Dark Theme */
+body.dark-mode {
+    background-color: #121212;
+    color: #ffffff;
+}
+
+.card.dark-mode {
+    background-color: #1e1e1e;
+    color: #ffffff;
+}
+
+.filter.dark-mode i,
+.filter.dark-mode p {
+    color: #ffffff;
+}
+
+.tax-toggle.dark-mode {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+
+/* privacy and terms styling */
+
+/* Styling for Privacy and Terms Pages */
+
+.page-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: Arial, sans-serif;
+}
+
+.unique-privacy-header, .unique-terms-header {
+    font-size: 2.5rem;
+    color: #333;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-weight: bold;
+}
+
+.unique-privacy-text, .unique-terms-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 2rem;
+}
+
+.unique-section-title {
+    font-size: 1.8rem;
+    color: #444;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.unique-list {
+    padding-left: 1.5rem;
+    margin-bottom: 2rem;
+    list-style-type: disc;
+}
+
+.unique-list-item {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 0.75rem;
+}
+
+.unique-back-link {
+    display: block;
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 1rem;
+    color: #007bff;
+    text-decoration: none;
+}
+
+.unique-back-link:hover {
+    text-decoration: underline;
+}

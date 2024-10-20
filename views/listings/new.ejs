@@ -1,0 +1,145 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row">
+    <div class="col-8 offset-2">
+        <h3>Create a New Listing</h3>
+        <form method="POST" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data">
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input 
+                    name="listing[title]"
+                    placeholder="Add a Title" 
+                    type="text"
+                    class="form-control"
+                    required
+                />
+                <div class="valid-feedback">Title looks good!</div>
+            </div>
+            
+            <div class="mb-3">
+                <label for="description" class="form-label">Description</label>
+                <textarea
+                    name="listing[description]"
+                    placeholder="Enter description"
+                    class="form-control"
+                    required
+                ></textarea>
+                <div class="invalid-feedback">please enter a short description!</div>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Image</label>
+                <input type="file" name="listing[image]" class="form-control" required />
+                <div class="invalid-feedback">Image should be valid!</div> 
+            </div>
+            
+            <div class="row mb-3">
+                <div class="col-4">
+                    <label for="price" class="form-label">Price</label>
+                    <input name="listing[price]" placeholder="ex-1200" class="form-control" required />
+                    <div class="invalid-feedback">Price should be valid!</div>
+                </div>
+                <div class="col-8">
+                    <label for="country" class="form-label">Country</label>
+                    <input name="listing[country]" placeholder="ex-india" type="text" class="form-control" required/>
+                    <div class="invalid-feedback">country name should be valid!</div>
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="location" class="form-label">Location</label>
+                <input
+                    name="listing[location]"
+                    placeholder="ex-pune"
+                    type="text" class="form-control"
+               required />
+               <div class="invalid-feedback">Location should be valid!</div>
+            </div>
+            <!-- amenities -->
+            <h4>Amenities</h4>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="listing[amenities][wifi]" id="wifi" value="true">
+                        <i class="fa-solid fa-wifi"></i>
+                        <label class="form-check-label" for="wifi">Wi-Fi Access</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="listing[amenities][swimmingPool]" id="swimmingPool" value="true">
+                        <i class="fa-solid fa-swimmer"></i>
+                        <label class="form-check-label" for="swimmingPool">Swimming Pool</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="listing[amenities][airConditioning]" id="airConditioning" value="true">
+                        <i class="fa-solid fa-fan"></i>
+                        <label class="form-check-label" for="airConditioning">Air Conditioning/Heating</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="listing[amenities][kitchenFacilities]" id="kitchenFacilities" value="true">
+                        <i class="fa-solid fa-utensils"></i>
+                        <label class="form-check-label" for="kitchenFacilities">Kitchen Facilities</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="listing[amenities][parkingSpace]" id="parkingSpace" value="true">
+                        <i class="fa-solid fa-car"></i>
+                        <label class="form-check-label" for="parkingSpace">Parking Space</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="listing[amenities][laundryFacilities]" id="laundryFacilities" value="true">
+                        <i class="fa-solid fa-tshirt"></i>
+                        <label class="form-check-label" for="laundryFacilities">Laundry Facilities</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="listing[amenities][gym]" id="gym" value="true">
+                        <i class="fa-solid fa-dumbbell"></i>
+                        <label class="form-check-label" for="gym">Gym</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="listing[amenities][spaServices]" id="spaServices" value="true">
+                        <i class="fa-solid fa-spa"></i>
+                        <label class="form-check-label" for="spaServices">Spa Services</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="listing[amenities][outdoorSpace]" id="outdoorSpace" value="true">
+                        <i class="fa-solid fa-tree"></i>
+                        <label class="form-check-label" for="outdoorSpace">Outdoor Space</label>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" name="listing[amenities][conciergeServices]" id="conciergeServices" value="true">
+                        <i class="fa-solid fa-concierge-bell"></i>
+                        <label class="form-check-label" for="conciergeServices">Concierge Services</label>
+                    </div>
+                </div>
+            </div>
+
+             <!-- category -->
+             <div class="mb-3">
+                <label for="category" class="form-label">Category</label>
+                <select name="listing[category]" class="form-select" id="category" required>
+                    <option value="">Select a category</option>
+                    <option value="Trending">Trending</option>
+                    <option value="Rooms">Rooms/Resort</option>
+                    <option value="Cities">Cities</option>
+                    <option value="Mountains">Mountains</option>
+                    <option value="Castles">Castles</option>
+                    <option value="Amazing Pools">Beach/Amazing Pools</option>
+                    <option value="Camping">Camping</option>
+                    <option value="Arctic">Arctic</option>
+                    <option value="Farm">Farm</option>
+                </select>
+                <div class="invalid-feedback">Please select a category</div>
+            </div>
+
+            <br>
+            <button class="btn btn-dark add-btn">Add</button>
+            <br><br>
+        </form>
+    </div>
+</div>

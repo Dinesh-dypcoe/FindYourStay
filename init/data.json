@@ -1,0 +1,162 @@
+[
+  {
+    "title": "Luxury Houseboat on Dal Lake",
+    "description": "Experience a stay on a traditional Kashmiri houseboat with stunning views of Dal Lake and the surrounding mountains.",
+    "image": {
+      "filename": "dal_lake_houseboat",
+      "url": "https://images.unsplash.com/photo-1597829352439-e1d81d887d1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    },
+    "price": 200,
+    "location": "Srinagar",
+    "country": "India",
+    "category": "Trending",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [74.7973, 34.0837]
+    }
+  },
+  {
+    "title": "Scenic Cottage in Gulmarg",
+    "description": "Stay in a cozy cottage in Gulmarg, offering breathtaking views of snow-covered peaks and endless skiing opportunities.",
+    "image": {
+      "filename": "gulmarg_cottage",
+      "url": "https://images.unsplash.com/photo-1564419433070-df7ff5a6bb32?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    },
+    "price": 300,
+    "location": "Gulmarg",
+    "country": "India",
+    "category": "Mountains",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [74.3808, 34.0486]
+    }
+  },
+  {
+    "title": "Heritage Stay in a Kashmir Palace",
+    "description": "Experience royalty with a stay in a palace that offers a blend of Kashmiri architecture and modern amenities.",
+    "image": {
+      "filename": "kashmir_palace",
+      "url": "https://images.unsplash.com/photo-1534160609629-56e972554f6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    },
+    "price": 400,
+    "location": "Srinagar",
+    "country": "India",
+    "category": "Castles",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [74.7973, 34.0837]
+    }
+  },
+  {
+    "title": "Hilltop Chalet in Manali",
+    "description": "Enjoy panoramic views of the Himalayas from this luxurious hilltop chalet nestled in the forests of Manali.",
+    "image": {
+      "filename": "manali_chalet",
+      "url": "https://images.unsplash.com/photo-1580389238235-38a98b1203d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    },
+    "price": 350,
+    "location": "Manali",
+    "country": "India",
+    "category": "Mountains",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [77.1892, 32.2396]
+    }
+  },
+  {
+    "title": "Riverside Cottage in Manali",
+    "description": "Stay in a serene cottage by the river with easy access to adventure sports like rafting and hiking.",
+    "image": {
+      "filename": "manali_riverside_cottage",
+      "url": "https://images.unsplash.com/photo-1570605660376-419aa8f3ec37?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    },
+    "price": 220,
+    "location": "Manali",
+    "country": "India",
+    "category": "Rooms",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [77.1892, 32.2396]
+    }
+  },
+  {
+    "title": "Beachfront Villa in Kerala",
+    "description": "Relax in this private beachfront villa with stunning views of the Arabian Sea in God’s Own Country.",
+    "image": {
+      "filename": "kerala_beach_villa",
+      "url": "https://images.unsplash.com/photo-1560347876-aeef00ee58a1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    },
+    "price": 500,
+    "location": "Varkala",
+    "country": "India",
+    "category": "Amazing Pools",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [76.7396, 8.7379]
+    }
+  },
+  {
+    "title": "Backwater Houseboat in Alleppey",
+    "description": "Explore the scenic Kerala backwaters aboard this traditional houseboat, perfect for a tranquil escape.",
+    "image": {
+      "filename": "alleppey_houseboat",
+      "url": "https://images.unsplash.com/photo-1567683302825-813da4c60a9b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    },
+    "price": 600,
+    "location": "Alleppey",
+    "country": "India",
+    "category": "Trending",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [76.3371, 9.4981]
+    }
+  },
+  {
+    "title": "Treehouse Retreat in Munnar",
+    "description": "Stay in a cozy treehouse in the heart of a tea plantation with breathtaking views of lush green valleys.",
+    "image": {
+      "filename": "munnar_treehouse",
+      "url": "https://images.unsplash.com/photo-1542596595-d78cbe37bfd9?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    },
+    "price": 320,
+    "location": "Munnar",
+    "country": "India",
+    "category": "Farm",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [77.0627, 10.0892]
+    }
+  },
+  {
+    "title": "Luxury Pool Villa in Kovalam",
+    "description": "Unwind in this luxury pool villa with stunning sea views, offering the perfect blend of tranquility and comfort.",
+    "image": {
+      "filename": "kovalam_pool_villa",
+      "url": "https://images.unsplash.com/photo-1559125269-8ff74de68676?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    },
+    "price": 550,
+    "location": "Kovalam",
+    "country": "India",
+    "category": "Amazing Pools",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [76.9771, 8.3986]
+    }
+  },
+  {
+    "title": "Eco-Friendly Resort in Wayanad",
+    "description": "Stay at an eco-friendly resort nestled in the forests of Wayanad, offering organic food and nature trails.",
+    "image": {
+      "filename": "wayanad_resort",
+      "url": "https://images.unsplash.com/photo-1575602543027-cae4f71319b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60"
+    },
+    "price": 400,
+    "location": "Wayanad",
+    "country": "India",
+    "category": "Farm",
+    "geometry": {
+      "type": "Point",
+      "coordinates": [76.1209, 11.6854]
+    }
+  }
+]
