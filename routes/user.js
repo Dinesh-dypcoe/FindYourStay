@@ -6,6 +6,34 @@ const passport = require("passport");
 const {saveRedirectUrl} = require("../middleware.js");
 const userController = require("../controllers/users.js");
 
+// Google OAuth login route
+router.get('/auth/google', passport.authenticate('google', {
+  scope: ['profile', 'email']
+}));
+
+// Google OAuth callback route
+router.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  (req, res) => {
+    // Successful authentication, redirect to desired page
+    res.redirect('/listings');
+  }
+);
+   
+
+// Logout route
+router.get('/logout', (req, res) => {
+  req.logout((err) => {
+    if (err) return next(err);
+    req.flash('success', 'You have logged out successfully.');
+    res.redirect('/');
+  });
+});
+
+module.exports = router;
+
+
+
 router.route("/signup")
      .get(userController.renderSignupForm)
      .post(wrapAsync(userController.signup));

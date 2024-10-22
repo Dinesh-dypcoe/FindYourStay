@@ -1,5 +1,11 @@
 <% layout("/layouts/boilerplate") %>
 
+<style>
+    .login-btn{
+        border-radius: 0.25rem !important;
+    }
+</style>
+
 <div class="row mt-5">
     <div class="col-md-6 offset-md-3">
         <div class="card p-4 shadow-lg">
@@ -9,7 +15,7 @@
                     <label for="username" class="form-label">Username</label>
                     <input 
                         name="username"
-                        placeholder="Enter your username" 
+                        placeholder="Enter your username or email" 
                         id="username"
                         type="text"
                         class="form-control"
@@ -36,7 +42,12 @@
                     <div class="invalid-feedback" id="password-feedback">Please provide a password.</div>
                 </div>
 
-                <button type="submit" class="btn btn-primary w-100">Login</button>
+                <button type="submit" class="btn btn-primary w-100 mb-3 login-btn">Login</button>
+
+                <a href="/auth/google" class="btn btn-success w-100">
+                    <i class="fa-brands fa-google"></i> Login with Google
+                </a>
+                  
                 <p class="mt-3 text-center">Don't have an account? <a href="/signup">Sign up here</a></p>
             </form>
         </div>

@@ -122,39 +122,34 @@
     <% } %>
 
     <!-- Reviews Section -->
-     <% if(listing.reviews.length > 0 ) {%> 
-    <div class="row mt-4 review-section">
-        <div class="col-8 offset-2">
-            <h4>Reviews</h4>
-            <div class="review-scroll-container">
-                <div class="row g-3">
-                    <% if (listing.reviews.length) { %>
+    <% if(listing.reviews.length > 0 ) { %> 
+        <div class="row mt-4 review-section">
+            <div class="col-8 offset-2">
+                <h4>Reviews</h4>
+                <div class="review-scroll-container">
+                    <div class="row g-3">
                         <% listing.reviews.forEach((review, index) => { %>
-                            <div class="col-md-5 review-card shadow-sm">
-                                <h5 class="card-title">@<%= review.author.username %></h5>
-                                <p class="starability-result" data-rating="<%= review.rating %>" ></p>
-                                <h5>Rating: <%= review.rating %> / 5</h5>
-                                
-                                <p><%= review.comment %></p>
-                                <p><small class="text-muted">Posted on <%= review.createdAt.toDateString() %></small></p>
-                                <% if(currUser && review.author && review.author._id.equals(currUser._id)) { %>
-                                    <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
-                                        <button class="btn btn-danger btn-sm">Delete</button>
-                                    </form>
-                                <% } %>
-                            </div>
+                            <% if (review.author) { %> <!-- Check if the author exists -->
+                                <div class="col-md-5 review-card shadow-sm">
+                                    <h5 class="card-title">@<%= review.author.username %></h5>
+                                    <p class="starability-result" data-rating="<%= review.rating %>" ></p>
+                                    <h5>Rating: <%= review.rating %> / 5</h5>
+                                    <p><%= review.comment %></p>
+                                    <p><small class="text-muted">Posted on <%= review.createdAt.toDateString() %></small></p>
+                                    <% if(currUser && review.author && review.author._id.equals(currUser._id)) { %>
+                                        <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                                            <button class="btn btn-danger btn-sm">Delete</button>
+                                        </form>
+                                    <% } %>
+                                </div>
+                            <% } %> <!-- Skip the review if the author does not exist -->
                         <% }) %>
-                    <% } else { %>
-                        <div class="col-12">
-                            <div class="alert alert-info">No reviews yet.</div>
-                        </div>
-                    <% } %>
+                    </div>
                 </div>
             </div>
         </div>
-       
-    </div>
     <% } %>
+    
 
     <div class="col-8 offset-2 map-container">
         <h3>Where you’ll be</h3>
