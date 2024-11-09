@@ -119,9 +119,11 @@ app.use((req, res, next) => {
   console.log(req.user);
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
-  res.locals.currUser = req.user;
+  res.locals.currUser = req.user || null;  // Set currUser to null if no user is logged in
+  console.log(res.locals.currUser);
   next();
 });
+
 
 //sending email
 const sendSignupEmail = async (user) => {
