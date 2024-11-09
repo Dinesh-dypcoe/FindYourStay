@@ -94,6 +94,35 @@ const sessionOptions = {
 };
 
 
+app.use(session(sessionOptions));
+app.use(flash());
+
+// Passport Configuration
+app.use(passport.initialize());
+app.use(passport.session());
+// passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
+
+// Flash Messages Middleware
+app.use((req, res, next) => {
+  console.log(req.user);
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  res.locals.currUser = req.user;
+  next();
+});
+
 //sending email
 const sendSignupEmail = async (user) => {
   const mailOptions = {
@@ -170,44 +199,6 @@ passport.use(new LocalStrategy(
     }
   }
 ));
-
-
-
-
-app.use(session(sessionOptions));
-app.use(flash());
-
-// Passport Configuration
-app.use(passport.initialize());
-app.use(passport.session());
-// passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
-});
-
-// Flash Messages Middleware
-app.use((req, res, next) => {
-  // Check if user is logged in
-  if (req.user) {
-    console.log("Current User:", req.user);  // Logs the user if logged in
-    res.locals.currUser = req.user; // Passes user data to locals for templates
-  } else {
-    console.log("Current User: undefined"); // Logs when user is not logged in
-    res.locals.currUser = null;  // Ensure currUser is null if not logged in
-  }
-  res.locals.success = req.flash('success');
-  res.locals.error = req.flash('error');
-  next();
-});
 
 
 //my-account
