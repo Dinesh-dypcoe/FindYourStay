@@ -75,7 +75,7 @@ const store= MongoStore.create({
 
 
 
-store.on("error",()=>{
+store.on("error",(err)=>{
   console.log("ERROR IN MONGO SESSION STORE",err)
 })
 
@@ -196,12 +196,19 @@ passport.deserializeUser(async (id, done) => {
 
 // Flash Messages Middleware
 app.use((req, res, next) => {
-  console.log("Current User:", req.user);  // This will log req.user each time a request is made
+  // Check if user is logged in
+  if (req.user) {
+    console.log("Current User:", req.user);  // Logs the user if logged in
+    res.locals.currUser = req.user; // Passes user data to locals for templates
+  } else {
+    console.log("Current User: undefined"); // Logs when user is not logged in
+    res.locals.currUser = null;  // Ensure currUser is null if not logged in
+  }
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
-  res.locals.currUser = req.user;
   next();
 });
+
 
 //my-account
 const accountRoutes = require('./routes/account');
