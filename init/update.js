@@ -10,8 +10,8 @@ async function updateOwner() {
         });
 
         const result = await Listing.updateMany(
-            { owner: null },  // Match listings where owner is null
-            { $set: { owner: new mongoose.Types.ObjectId('670d5ca585a86af7f4d519fc') } }  // Set owner to the new ObjectId
+            { owner: '670d5ca585a86af7f4d519fc' },  // Match listings where owner is null
+            { $set: { owner: new mongoose.Types.ObjectId('672ddba5a1efe85676837c74') } }  // Set owner to the new ObjectId
         );
 
         console.log(`${result.modifiedCount} listings updated successfully.`);

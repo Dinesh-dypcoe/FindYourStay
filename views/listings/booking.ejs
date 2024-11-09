@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking for <%= listing.title %></title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f8fc;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .booking-page {
+            max-width: 500px;
+            margin-bottom: 2rem;
+            width: 90%;
+            background-color: #ffffff;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .booking-page h1 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .booking-page img {
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-page h2 {
+            font-size: 20px;
+            color: #333;
+            margin: 1.5rem 0;
+        }
+
+        .booking-page label {
+            display: block;
+            font-weight: 500;
+            color: #666;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .booking-page input[type="date"] {
+            width: 100%;
+            padding: 0.6rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            color: #333;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .booking-page input[type="date"]:focus {
+            border-color: #4c5fd7;
+        }
+
+        .booking-page h3 {
+            font-size: 18px;
+            color: #4c5fd7;
+            margin-top: 1.5rem;
+            font-weight: 600;
+        }
+
+        #confirm-booking {
+            display: block;
+            width: 100%;
+            padding: 0.8rem;
+            background-color: #4c5fd7;
+            color: #fff;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: background-color 0.2s;
+        }
+
+        #confirm-booking:hover {
+            background-color: #3b4db3;
+        }
+
+        #confirm-booking:active {
+            background-color: #2c3a8a;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .booking-page {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="booking-page">
+        <h1>Booking for <%= listing.title %></h1>
+        <img src="<%= listing.image.url %>" alt="<%= listing.title %>" />
+        
+        <h2>Price: ₹<%= listing.price %> per night</h2>
+
+        <label for="checkin">Check-in Date:</label>
+        <input type="date" id="checkin" name="checkin" required onchange="calculateTotal()">
+
+        <label for="checkout">Check-out Date:</label>
+        <input type="date" id="checkout" name="checkout" required onchange="calculateTotal()">
+
+        <h3 id="total-amount">Total Amount (including GST): ₹0</h3>
+
+        <button id="confirm-booking">Checkout</button>
+    </div>
+
+    <!-- Include Razorpay SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <!-- Pass Razorpay Key ID from server -->
+    <script>
+        const razorpayKey = "<%= process.env.RAZORPAY_KEY_ID %>";
+    </script>
+
+<script>
+const pricePerNight = <%= listing.price %>;
+const gstRate = 0.18; // 18% GST
+
+function calculateTotal() {
+    const checkinDate = document.getElementById('checkin').value;
+    const checkoutDate = document.getElementById('checkout').value;
+
+    if (checkinDate && checkoutDate) {
+        const checkin = new Date(checkinDate);
+        const checkout = new Date(checkoutDate);
+        const days = (checkout - checkin) / (1000 * 3600 * 24);
+
+        if (days > 0) {
+            const baseAmount = days * pricePerNight;
+            const gstAmount = baseAmount * gstRate;
+            const totalAmount = baseAmount + gstAmount;
+            document.getElementById('total-amount').innerText = 'Total Amount (including GST): ₹' + totalAmount.toFixed(2);
+            console.log("Calculated Total Amount: ", totalAmount);
+            return totalAmount; // Return amount in paise (multiply by 100 for Razorpay)
+        }
+    }
+    return 0;
+}
+
+document.getElementById('confirm-booking').addEventListener('click', () => {
+    const checkinDate = document.getElementById('checkin').value;
+    const checkoutDate = document.getElementById('checkout').value;
+    const totalAmount = calculateTotal(); // Calculate total amount
+
+    if (!checkinDate || !checkoutDate || totalAmount === 0) {
+        alert("Please select valid dates.");
+        return;
+    }
+
+    // Send request to create an order
+    fetch(`/listings/<%= listing._id %>/create-order`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            totalAmount: totalAmount,  // Send amount in paise
+            checkinDate,
+            checkoutDate
+        })
+    })
+    .then(res => res.json())
+    .then(order => {
+        if (!order.amount) {
+            alert("Error: Amount not received from the server.");
+            return;
+        }
+
+        const options = {
+            key: razorpayKey,
+            amount: order.amount,
+            currency: "INR",
+            name: "FindYourStay",
+            description: `Booking for ${"<%= listing.title %>"}`,
+            order_id: order.orderId,
+            handler: async (response) => {
+                await fetch(`/listings/<%= listing._id %>/confirm-booking`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        checkinDate,
+                        checkoutDate,
+                        payment_id: response.razorpay_payment_id,
+                        order_id: response.razorpay_order_id,
+                        amount: totalAmount / 100  // Convert to rupees for backend processing if needed
+                    })
+                });
+                // Call route to send booking email
+                await fetch(`/listings/<%= listing._id %>/send-booking-email`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        email: "<%= user.email %>", // Use 'user' instead of 'req.user'
+                        checkinDate,
+                        checkoutDate,
+                        listingTitle: "<%= listing.title %>",
+                        totalAmount
+                    })
+                });
+                alert("Booking successful! A confirmation email has been sent.");
+                window.location.href = "/";
+            }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.on('payment.failed', function (response){
+            alert("Payment failed. Please try again.");
+        });
+        rzp.open();
+    })
+    .catch(err => {
+        console.error("Error creating Razorpay order:", err);
+        alert("Error creating order. Please try again.");
+    });
+});
+
+
+</script>
+
+</body>
+</html>

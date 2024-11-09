@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - My Listings</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Base styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f3f4f6;
+            color: #333;
+        }
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            font-size: 2em;
+            color: #333;
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+
+        /* Listing styling */
+        .listing {
+            background: #fafafa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border: 1px solid #ddd;
+            transition: box-shadow 0.3s ease;
+        }
+        .listing:hover {
+            box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.1);
+        }
+        .listing h3 {
+            font-size: 1.5em;
+            margin: 0;
+            color: #4CAF50;
+        }
+        .listing p {
+            font-size: 1em;
+            margin: 5px 0;
+            color: #555;
+        }
+        .view-link {
+            align-self: flex-start;
+            font-size: 0.9em;
+            text-decoration: none;
+            color: #4CAF50;
+            border: 1px solid #4CAF50;
+            padding: 6px 12px;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .view-link:hover {
+            background-color: #4CAF50;
+            color: #fff;
+        }
+
+        /* No listings message */
+        .no-listings {
+            text-align: center;
+            font-size: 1.2em;
+            color: #888;
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Your Properties</h1>
+        <% if (listings.length > 0) { %>
+            <% listings.forEach(listing => { %>
+                <div class="listing">
+                    <h3><%= listing.title %></h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Location: <%= listing.location %></p>
+                    <p><i class="fas fa-rupee-sign"></i> Price: ₹<%= listing.price %></p>
+                    <a href="/listings/<%= listing._id %>" class="view-link">View Listing</a>
+                </div>
+            <% }); %>
+        <% } else { %>
+            <p class="no-listings">You have no listings yet.</p>
+        <% } %>
+    </div>
+</body>
+</html>

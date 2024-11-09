@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate") %>
 
 <style>
-    .login-btn{
+    .login-btn {
         border-radius: 0.25rem !important;
     }
 </style>
@@ -10,9 +10,11 @@
     <div class="col-md-6 offset-md-3">
         <div class="card p-4 shadow-lg">
             <form action="/login" method="post" novalidate class="needs-validation">
-             <h2 class="text-center mb-4">Login to FindYourStay</h2>
+                <h2 class="text-center mb-4">Login to FindYourStay</h2>
+                
+                <!-- Username or Email Input Field -->
                 <div class="mb-3">
-                    <label for="username" class="form-label">Username</label>
+                    <label for="username" class="form-label">Username or Email</label>
                     <input 
                         name="username"
                         placeholder="Enter your username or email" 
@@ -21,9 +23,10 @@
                         class="form-control"
                         required
                     />
-                    <div class="invalid-feedback">Please provide a username.</div>
+                    <div class="invalid-feedback">Please provide a username or email.</div>
                 </div>
 
+                <!-- Password Input Field -->
                 <div class="mb-4">
                     <label for="password" class="form-label">Password</label>
                     <div class="input-group">
@@ -42,8 +45,8 @@
                     <div class="invalid-feedback" id="password-feedback">Please provide a password.</div>
                 </div>
 
+                <!-- Submit and Google Login Buttons -->
                 <button type="submit" class="btn btn-primary w-100 mb-3 login-btn">Login</button>
-
                 <a href="/auth/google" class="btn btn-success w-100">
                     <i class="fa-brands fa-google"></i> Login with Google
                 </a>

@@ -13,6 +13,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const ExpressError = require("./utils/ExpressError");
 const User = require("./models/user");
 require('dotenv').config();
+app.use(express.json());
 
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
@@ -141,6 +142,37 @@ async function(accessToken, refreshToken, profile, done) {
 }));
 
 
+passport.use(new LocalStrategy(
+  { usernameField: 'username', passwordField: 'password' },
+  async (username, password, done) => {
+    try {
+      // Find user by either username or email
+      const user = await User.findOne({
+        $or: [{ username: username }, { email: username }]
+      });
+
+      if (!user) {
+        return done(null, false, { message: 'Invalid username or email.' });
+      }
+
+      // Use the `user.authenticate` method from passport-local-mongoose
+      user.authenticate(password, (err, authenticatedUser, passwordError) => {
+        if (err) {
+          return done(err);
+        }
+        if (passwordError) {
+          return done(null, false, { message: 'Incorrect password.' });
+        }
+        return done(null, authenticatedUser);
+      });
+    } catch (error) {
+      return done(error);
+    }
+  }
+));
+
+
+
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -148,17 +180,32 @@ app.use(flash());
 // Passport Configuration
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+// passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
 
 // Flash Messages Middleware
 app.use((req, res, next) => {
+  console.log("Current User:", req.user);  // This will log req.user each time a request is made
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   res.locals.currUser = req.user;
   next();
 });
+
+//my-account
+const accountRoutes = require('./routes/account');
+app.use('/', accountRoutes);
 
 // Favicon Handling
 // app.get('/favicon.ico', (req, res) => res.status(204).end());
@@ -186,6 +233,9 @@ app.use((err, req, res, next) => {
 
 // Server Listener
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
+const server=app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
 });
+
+server.setTimeout(50000);  // Adjust as needed (in ms)
+server.keepAliveTimeout = 65000;

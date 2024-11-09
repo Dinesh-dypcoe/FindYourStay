@@ -1,168 +1,234 @@
-<style>
-  .navbar {
-    display: flex;
-    justify-content: space-between; /* Space between navbar items */
-    align-items: center;
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Navbar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-  .navbar .search-container {
-    flex-grow: 1; /* Allow the search container to grow */
-    display: flex;
-    justify-content: center; /* Center the search bar */
-  }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            width: 100%;
+        }
 
-  .search-btn {
-    background-color: #fe424d;
-    color: #fff;
-    border-radius: 25px;
-    padding: 0 1rem 0 1rem;
-  }
+        .navbar .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            max-width: 600px; /* Max width for larger screens */
+            margin: 0 auto;
+        }
 
-  .search-btn:hover {
-    background-color: #fe424d;
-    color: #fff;
-  }
+        .search-input {
+            flex: 1;
+            padding: 0.5rem;
+            font-size: 1rem;
+            border-radius: 25px;
+            margin-right: 0.5rem;
+            min-width: 100px; /* Minimum width for very small screens */
+            text-align: center;
+        }
 
-  .search-btn i {
-    display: inline;
-    margin-right: 0.5rem;
-  }
+        .search-btn {
+            background-color: #fe424d;
+            color: #fff;
+            border-radius: 25px;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            white-space: nowrap;
+        }
 
-  .search-input {
-    width: 308px;
-    border-radius: 25px;
-    padding: 0.5rem 3rem 0.5rem 3rem;
-    font-size: 1rem;
-  }
+        .search-btn:hover {
+            opacity: 0.8;
+            background-color: #fe424d;
+            color: #fff;
+            cursor: pointer;
+        }
 
-  /* Additional Styles */
-  .nav-link {
-    text-decoration: none;
-    color: #333; /* Change link color if needed */
-  }
+        /* Hide "List at FindYourStay" on smaller screens */
+        @media (max-width: 992px) {
+            .listAtFindYourStay {
+                display: none;
+            }
 
-  .dropdown {
-    position: relative; /* Set relative position for dropdown */
-  }
+            .search-input {
+                padding: 0.4rem; /* Adjust padding for smaller screens */
+                font-size: 0.9rem; /* Slightly smaller font size */
+                text-align: center;
+            }
 
-  .dropdown-menu {
-    position: absolute; /* Absolute positioning */
-    top: 100%; /* Position below the button */
-    right: 0; /* Align dropdown to the right */
-    text-align: center;
-    min-width: 200px; /* Set a minimum width for dropdown items */
-    background-color: white; /* Background color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Shadow for better visibility */
-    z-index: 1000; /* Ensure it is above other content */
-    opacity: 0; /* Start hidden */
-    visibility: hidden; /* Make it invisible */
-    transition: opacity 0.3s ease, visibility 0.3s ease; /* Smooth transition */
-  }
+            .search-btn {
+                padding: 0.4rem 0.8rem; /* Adjust button padding for smaller screens */
+                font-size: 0.9rem; /* Slightly smaller font size */
+            }
+        }
 
-  /* Show the dropdown when it has the 'show' class */
-  .dropdown-menu.show {
-    opacity: 1; /* Fully visible */
-    visibility: visible; /* Make it visible */
-  }
+        @media (max-width: 450px) {
+            .navbar {
+                padding: 0.5rem; /* Reduce padding */
+                flex-wrap: wrap; /* Allow wrapping of elements */
+            }
 
-  /* Flexbox for alignment */
-  .navbar-nav.ms-auto {
-    display: flex;
-    align-items: center; /* Vertically align items */
-  }
+            /* Adjust search container to fit on smaller screens */
+            .search-container {
+                flex-grow: 1;
+                margin: 0;
+            }
 
-  /* Add some margin between the 'List at FindYourStay' link and the account menu */
-  .nav-link {
-    margin-right: 1rem;
-  }
+            /* Make search input and button smaller */
+            .search-input {
+                font-size: 0.8rem;
+                padding: 0.3rem;
+            }
 
-  .account-menu {
-    position: relative; /* Change to relative to ensure it aligns properly */
-    margin-left: auto; /* Push it to the far right */
-  }
+            .search-btn {
+                font-size: 0.8rem;
+                padding: 0.3rem 0.6rem;
+            }
 
-  .account-menu .btn {
-    margin-top: 0.5rem;
-  }
+            /* Hide 'List at FindYourStay' for very small screens */
+            .listAtFindYourStay {
+                display: none;
+            }
 
-  /* Media Query to keep account menu visible on small screens */
-  @media (max-width: 992px) {
-    .account-menu {
-      display: block !important; /* Ensure it stays visible */
-      position: fixed; /* Fixed positioning for constant visibility */
-      top: 10px; /* Adjust top position if necessary */
-      right: 10px; /* Keep it aligned to the right */
-      z-index: 1000; /* Keep it above other content */
-    }
+            /* Reduce the size of the account menu button */
+            .account-menu button {
+                padding: 0.3rem 0.5rem;
+            }
+        }
+        
+        /* Center search bar with a slight right shift on larger screens */
+        @media (min-width: 992px) {
+            .search-container {
+                margin-left: 25% !important; /* Adjust this value to push the search bar more to the right */
+            }
+        }
 
-    .navbar {
-      justify-content: space-between; /* Maintain spacing on small screens */
-    }
-  }
-</style>
+        /* Sidebar styling */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -250px; /* Initially off-screen */
+            width: 250px; /* Sidebar width */
+            height: auto;
+            background-color: white;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+            transition: right 0.3s ease;
+            z-index: 1000;
+        }
+
+        /* Sidebar when open */
+        .sidebar.open {
+            right: 0;
+        }
+
+        .sidebar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            background-color: #fe424d;
+            color: #fff;
+        }
+
+        .sidebar-header .close-btn {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .sidebar-content {
+            padding: 1rem;
+        }
+
+        .sidebar-content a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+        }
+
+        .sidebar-content a:hover {
+            background-color: #f8f9fa;
+        }
+    </style>
+</head>
+<body>
 
 <nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/listings"><i class="fa-solid fa-house-crack"></i></a>
-    
-    <!-- Hamburger Icon -->
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/listings"><i class="fa-solid fa-house-crack"></i></a>
 
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="nav-link" href="/listings">Explore</a>
-      </div>
-
-      <!-- Centering the search bar -->
-      <div class="search-container">
-        <form class="d-flex" role="search" action="/listings/search" method="GET">
-            <input class="form-control me-2 search-input" type="search" placeholder="Search by Country or Title" name="query">
-            <button class="btn search-btn" type="submit">
-                <i class="fa-solid fa-magnifying-glass"></i>Search
-            </button>
-        </form>
-    </div>
-          
-
-      <div class="navbar-nav ms-auto">
-        <a class="nav-link" href="/listings/new">List at FindYourStay</a>
-      </div>
-
-      <!-- Dropdown menu stays in top-right corner without overlap -->
-      <div class="account-menu">
-        <div class="dropdown">
-          <button class="btn btn-secondary hamburger-menu" id="hamburgerMenuButton" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fa-solid fa-user" id="hamburgerMenuButton"></i> <!-- User icon -->
-          </button>
-          <div class="dropdown-menu" id="hamburgerDropdown">
-            <a class="nav-link dropdown-item" aria-current="page" href=""><b><i class="fa-solid fa-user"></i> My Account</b></a>
-            <% if (!currUser) { %>
-              <a class="nav-link dropdown-item" aria-current="page" href="/signup"><b> Sign Up</b></a>
-              <a class="nav-link dropdown-item" href="/login"><b>Log In</b></a>
-            <% } else { %>
-              <a class="nav-link dropdown-item" href="/logout"><b>Log Out</b></a>
-            <% } %>
-          </div>
+        <div class="search-container">
+            <form class="d-flex" role="search" action="/listings/search" method="GET" style="display: flex; width: 100%;">
+                <input class="form-control me-2 search-input" type="search" placeholder="Search by Country or Title" name="query">
+                <button class="btn search-btn" type="submit">
+                    <i class="fa-solid fa-magnifying-glass"></i> Search
+                </button>
+            </form>
         </div>
-      </div>
+
+        <div class="navbar-nav ms-auto listAtFindYourStay">
+            <a class="nav-link" href="/listings/new">List at FindYourStay</a>
+        </div>
+
+        <!-- Account menu button -->
+        <div class="account-menu">
+            <button class="btn btn-secondary" id="accountMenuButton">
+                <i class="fa-solid fa-user"></i>
+            </button>
+        </div>
     </div>
-  </div>
 </nav>
 
-<script>
-  // Toggle the hamburger menu on click
-  document.getElementById('hamburgerMenuButton').addEventListener('click', function() {
-    const dropdown = document.getElementById('hamburgerDropdown');
-    dropdown.classList.toggle('show'); // Toggle visibility
-  });
+<!-- Sidebar structure -->
+<div class="sidebar" id="accountSidebar">
+    <div class="sidebar-header">
+        <span>Account Menu</span>
+        <button class="close-btn" id="closeSidebar">&times;</button>
+    </div>
+    <div class="sidebar-content">
+        <b><a href="/my-account"><i class="fa-solid fa-user"></i> My Account</a></b>
+        <div class="navbar-nav ms-auto">
+            <b><a class="nav-link" href="/listings/new">List at FindYourStay</a></b>
+        </div>
+        <% if (!currUser) { %>
+            <b><a href="/signup">Sign Up</a></b>
+            <b><a href="/login">Log In</a></b>
+        <% } else { %>
+            <b><a href="/logout">Log Out</a></b>
+        <% } %>
+        <b><a href="/contact">Contact Us</a></b>
+    </div>
+</div>
 
-  // Optional: Close the menu when clicking outside
-  window.addEventListener('click', function(event) {
-    const dropdown = document.getElementById('hamburgerDropdown');
-    if (!event.target.matches('#hamburgerMenuButton') && !dropdown.contains(event.target)) {
-      dropdown.classList.remove('show');
-    }
-  });
+<script>
+    // Sidebar toggle functionality
+    const accountMenuButton = document.getElementById('accountMenuButton');
+    const accountSidebar = document.getElementById('accountSidebar');
+    const closeSidebar = document.getElementById('closeSidebar');
+
+    accountMenuButton.addEventListener('click', function() {
+        accountSidebar.classList.toggle('open'); // Show the sidebar
+    });
+
+    closeSidebar.addEventListener('click', function() {
+        accountSidebar.classList.remove('open'); // Close the sidebar
+    });
 </script>
+</body>
+</html>

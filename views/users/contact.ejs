@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | FindYourStay</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f1f4f8;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .contact-section {
+            max-width: 900px;
+            margin: 1rem auto;
+            padding: 50px 20px;
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        .contact-section h2 {
+            font-size: 32px;
+            color: #4c5fd7;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .contact-section p {
+            font-size: 16px;
+            color: #555;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .contact-form label {
+            font-size: 16px;
+            color: #333;
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: #333;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #4c5fd7;
+        }
+
+        .contact-form button {
+            width: 100%;
+            padding: 15px;
+            border-radius: 5px;
+            background-color: #4c5fd7;
+            color: #fff;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: #3b4db3;
+        }
+
+        .contact-form button:active {
+            background-color: #2c3a8a;
+        }
+
+        .contact-form .back-link {
+            display: block;
+            margin-top: 20px;
+            font-size: 16px;
+            color: #4c5fd7;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-form .back-link:hover {
+            color: #3b4db3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .contact-section {
+                padding: 30px 15px;
+            }
+
+            .contact-section h2 {
+                font-size: 28px;
+            }
+
+            .contact-form input, .contact-form textarea, .contact-form button {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contact-section">
+        <h2>Contact Us</h2>
+        <p>We'd love to hear from you! Please fill out the form below to get in touch.</p>
+
+        <form action="/contact" method="POST" class="contact-form">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="message">Your Message</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+
+            <button type="submit">Send Message</button>
+        </form>
+        <br>
+        <a href="/" class="back-link">Back to Home</a>
+    </div>
+
+</body>
+</html>
