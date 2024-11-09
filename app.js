@@ -61,9 +61,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
-
-
-
 const store= MongoStore.create({
   mongoUrl: dbURL,
   crypto:{
@@ -72,8 +69,6 @@ const store= MongoStore.create({
 
   }
 })
-
-
 
 store.on("error",(err)=>{
   console.log("ERROR IN MONGO SESSION STORE",err)
@@ -92,37 +87,6 @@ const sessionOptions = {
     httpOnly: true,
   }
 };
-
-
-app.use(session(sessionOptions));
-app.use(flash());
-
-// Passport Configuration
-app.use(passport.initialize());
-app.use(passport.session());
-// passport.use(new LocalStrategy(User.authenticate()));
-passport.serializeUser((user, done) => {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async (id, done) => {
-  try {
-    const user = await User.findById(id);
-    done(null, user);
-  } catch (err) {
-    done(err);
-  }
-});
-
-// Flash Messages Middleware
-app.use((req, res, next) => {
-  console.log(req.user);
-  res.locals.success = req.flash('success');
-  res.locals.error = req.flash('error');
-  res.locals.currUser = req.user || null;  // Set currUser to null if no user is logged in
-  console.log(res.locals.currUser);
-  next();
-});
 
 
 //sending email
@@ -202,6 +166,38 @@ passport.use(new LocalStrategy(
   }
 ));
 
+
+
+
+app.use(session(sessionOptions));
+app.use(flash());
+
+// Passport Configuration
+app.use(passport.initialize());
+app.use(passport.session());
+// passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+passport.deserializeUser(async (id, done) => {
+  try {
+    const user = await User.findById(id);
+    done(null, user);
+  } catch (err) {
+    done(err);
+  }
+});
+
+// Flash Messages Middleware
+app.use((req, res, next) => {
+  console.log("Current User:", req.user);  // This will log req.user each time a request is made
+  res.locals.success = req.flash('success');
+  res.locals.error = req.flash('error');
+  res.locals.currUser = req.user || null;
+  console.log("Current User:",res.locals.currUser);
+  next();
+});
 
 //my-account
 const accountRoutes = require('./routes/account');
