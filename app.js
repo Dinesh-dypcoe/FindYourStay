@@ -30,6 +30,7 @@ const transporter = nodemailer.createTransport({
 const listingRoutes = require("./routes/listing");
 const reviewRoutes = require("./routes/review");
 const userRoutes = require("./routes/user");
+const accountRoutes = require('./routes/account');
 
 
 const  dbURL = process.env.ATLASDB_URL;
@@ -170,11 +171,11 @@ passport.use(new LocalStrategy(
 
 
 app.use(session(sessionOptions));
-app.use(flash());
-
 // Passport Configuration
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash());
+
 // passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser((user, done) => {
   done(null, user.id);
@@ -199,7 +200,6 @@ app.use((req, res, next) => {
 });
 
 //my-account
-const accountRoutes = require('./routes/account');
 app.use('/', accountRoutes);
 
 // Favicon Handling

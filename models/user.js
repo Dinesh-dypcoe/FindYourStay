@@ -24,18 +24,10 @@ const userSchema = new Schema({
     }
 });
 
-// Middleware to remove user reviews when the user is deleted
-userSchema.pre('remove', async function(next) {
-    await Listing.updateMany({ owner: this._id }, { $unset: { owner: 1 } }); // Unset the owner field in the listings
-    await Review.deleteMany({ author: this._id }); // Delete reviews created by this user
-    next();
-});
-
 userSchema.pre('remove', async function(next) {
     await Review.deleteMany({ author: this._id }); // Delete all reviews by the deleted user
     next();
 });
-
 
 
 // Plugin for passport-local-mongoose, using 'username' as the field for authentication
