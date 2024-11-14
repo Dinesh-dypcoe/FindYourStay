@@ -228,9 +228,9 @@ app.use((err, req, res, next) => {
 });
 
 // Server Listener
-const PORT = process.env.PORT || 8080;
-const server=app.listen(PORT, () => {
-  console.log(`Server is listening on port ${PORT}`);
+const port = process.env.PORT || 8080;
+const server=app.listen(port, () => {
+  console.log(`Server is listening on port ${port}`);
 });
 
 server.setTimeout(50000);  // Adjust as needed (in ms)
