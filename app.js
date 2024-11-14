@@ -193,7 +193,7 @@ passport.deserializeUser(async (id, done) => {
 
 // Flash Messages Middleware
 app.use((req, res, next) => {
-  console.log("Current User:", req.user);
+  // console.log("Current User:", req.user);
   res.locals.success = req.flash('success');
   res.locals.error = req.flash('error');
   res.locals.currUser = req.user;
