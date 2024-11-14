@@ -7,7 +7,7 @@ const crypto = require('crypto');
 
 // Function to generate avatar URL
 function generateAvatarURL(username) {
-    return 'https://avatar.iran.liara.run/public/boy?username=[username]';
+    return `https://avatar.iran.liara.run/public/boy?username=${username}`;
 }
 
 // Route to render My Account page
