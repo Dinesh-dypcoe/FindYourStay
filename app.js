@@ -15,6 +15,8 @@ const User = require("./models/user");
 require('dotenv').config();
 app.use(express.json());
 
+const  dbURL = process.env.ATLASDB_URL;
+
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
   service: 'Gmail',
@@ -32,8 +34,6 @@ const reviewRoutes = require("./routes/review");
 const userRoutes = require("./routes/user");
 const accountRoutes = require('./routes/account');
 
-
-const  dbURL = process.env.ATLASDB_URL;
 
 main()
   .then(() =>{
