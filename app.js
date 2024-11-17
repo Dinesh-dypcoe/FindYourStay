@@ -22,7 +22,7 @@ const transporter = nodemailer.createTransport({
   service: 'Gmail',
   auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS, // Use the app password here
+      pass: process.env.EMAIL_PASS, 
   },
 });
 
@@ -94,8 +94,8 @@ const sessionOptions = {
 //sending email
 const sendSignupEmail = async (user) => {
   const mailOptions = {
-    from: '"FindYourStay" <no-reply@findyourstay.com>', // Replace with your "from" email
-    to: user.email, // Send to the registered user's email
+    from: '"FindYourStay" <no-reply@findyourstay.com>',
+    to: user.email,
     subject: 'Welcome to FindYourStay!',
     text: `Hi ${user.username},\n\nWelcome to FindYourStay! We're thrilled to have you join our community of travelers and hosts.\n\nWhether you're looking for the perfect stay or planning to list your own property, we're here to make your experience seamless and enjoyable.\n\nIf you have any questions or need assistance, feel free to reach out to us anytime.\n\nHappy exploring!\n\nBest regards,\nThe FindYourStay Team`
   };
@@ -117,7 +117,6 @@ async function(accessToken, refreshToken, profile, done) {
     let user = await User.findOne({ googleId: profile.id });
 
     if (!user) {
-      // Create a new user if they don't already exist
       user = new User({
         googleId: profile.id,
         username: profile.displayName,
@@ -208,7 +207,7 @@ app.use('/', accountRoutes);
 
 // Routes
 app.get("/", (req, res) => {
-  res.redirect('/listings');  // Render a homepage template
+  res.redirect('/listings'); 
 });
 
 app.use("/listings", listingRoutes);
@@ -217,7 +216,7 @@ app.use("/", userRoutes);
 
 // Catch-all Route for 404 Errors
 app.all("*", (req, res, next) => {
-  next(new ExpressError("Page Not Found", 404));  // Create a new error with status code 404
+  next(new ExpressError("Page Not Found", 404));
 });
 
 // Error Handling Middleware
@@ -233,5 +232,5 @@ const server=app.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
 
-server.setTimeout(50000);  // Adjust as needed (in ms)
+server.setTimeout(50000);
 server.keepAliveTimeout = 65000;
