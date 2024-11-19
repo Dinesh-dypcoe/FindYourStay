@@ -290,14 +290,16 @@
             <b><a href="/signup">Sign Up</a></b>
             <b><a href="/login">Log In</a></b>
         <% } else { %>
-            <b><a href="/profile"><i class="fa-solid fa-user"></i> My Profile</a></b>
+            <b><a href="/profile"><i class="fa-solid fa-user"></i>My Profile</a></b>
             <b><a href="/my-properties">My Hostings</a></b>
-            <b><a href="/listings/new">List at FindYourStay</a></b>
         <% } %>
+        <div class="navbar-nav ms-auto">
+            <b><a class="nav-link" href="/listings/new">List at FindYourStay</a></b>
+        </div>
         <b><a href="/contact">Contact Us</a></b>
-        <% if (currUser) { %>
+        <% if(currUser){%>
             <b><a href="/logout">Log Out</a></b>
-        <% } %>
+        <%}%>
     </div>
 </div>
 
