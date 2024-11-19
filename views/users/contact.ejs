@@ -15,7 +15,7 @@
         }
 
         .contact-section {
-            max-width: 900px;
+            max-width: 100%;
             margin: 1rem auto;
             padding: 30px 20px;
             background-color: #ffffff;
@@ -40,7 +40,7 @@
         }
 
         .contact-form {
-            max-width: 600px;
+            max-width: 100%;
             margin: 0 auto;
             text-align: left;
         }
@@ -105,7 +105,9 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .contact-section {
-                padding: 30px 15px;
+                padding: 20px 10px;
+                margin-right: 1rem;
+                margin-left: 1rem;
             }
 
             .contact-section h2 {
@@ -114,6 +116,37 @@
 
             .contact-form input, .contact-form textarea, .contact-form button {
                 padding: 12px;
+                font-size: 15px;
+            }
+
+            .contact-form {
+                max-width: 100%;
+                padding: 0 15px; /* Added padding for left and right on smaller screens */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .contact-section {
+                padding: 20px 10px;
+                margin-right: 0.8rem;
+                margin-left: 0.8rem;
+            }
+
+            .contact-section h2 {
+                font-size: 26px;
+            }
+
+            .contact-form input, .contact-form textarea, .contact-form button {
+                padding: 10px;
+                font-size: 14px;
+            }
+
+            .contact-form .back-link {
+                font-size: 14px;
+            }
+
+            .contact-form {
+                padding: 0 15px; /* Ensure there's padding on smaller screens */
             }
         }
     </style>
