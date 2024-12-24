@@ -15,7 +15,7 @@ const User = require("./models/user");
 require('dotenv').config();
 app.use(express.json());
 
-const  dbURL = process.env.ATLASDB_URL;
+const dbURL = process.env.ATLASDB_URL || "mongodb://localhost:27017/findyourstay";
 
 const nodemailer = require('nodemailer');
 const transporter = nodemailer.createTransport({
@@ -26,7 +26,8 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-
+const cors = require('cors');
+app.use(cors());
 
 // Route Files
 const listingRoutes = require("./routes/listing");
@@ -47,7 +48,13 @@ main()
 
 async function main() {
     // await mongoose.connect(MONGO_URL);
-    await mongoose.connect(dbURL);
+    await mongoose.connect(dbURL)
+      .then(() => {
+        console.log('Connected to MongoDB');
+      })
+      .catch((err) => {
+        console.error('MongoDB connection error:', err);
+      });
 }
 
 
@@ -62,14 +69,14 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "public")));
 
-const store= MongoStore.create({
+const store = MongoStore.create({
   mongoUrl: dbURL,
-  crypto:{
-    secret:process.env.SECRET,
-    touchAfter:24*3600,
-
-  }
-})
+  crypto: {
+    secret: process.env.SECRET
+  },
+  touchAfter: 24 * 3600,
+  collectionName: 'sessions'
+});
 
 store.on("error",(err)=>{
   console.log("ERROR IN MONGO SESSION STORE",err)
