@@ -11,18 +11,6 @@
         "src": "/(.*)",
         "dest": "app.js"
       }
-    ],
-    "env": {
-      "ATLASDB_URL": "@atlasdb_url",
-      "SECRET": "@secret",
-      "CLOUDINARY_CLOUD_NAME": "@cloudinary_cloud_name",
-      "CLOUDINARY_KEY": "@cloudinary_key",
-      "CLOUDINARY_SECRET": "@cloudinary_secret",
-      "ORS_API_KEY": "@ors_api_key",
-      "EMAIL_USER": "@email_user",
-      "EMAIL_PASS": "@email_pass",
-      "RAZORPAY_KEY_ID": "@razorpay_key_id",
-      "RAZORPAY_SECRET": "@razorpay_secret"
-    }
+    ]
   }
   
