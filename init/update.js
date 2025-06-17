@@ -4,10 +4,6 @@ const Listing = require('../models/listing'); // Assuming your listing model is 
 async function updateOwner() {
     try {
         // Ensure you have your MongoDB connection established
-        await mongoose.connect('mongodb+srv://dineshaher2505:Dinesh%402505@cluster0.9zukf.mongodb.net/findyourstay?retryWrites=true&w=majority&appName=Cluster0', {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
 
         const result = await Listing.updateMany(
             { owner: '670d5ca585a86af7f4d519fc' },  // Match listings where owner is null
