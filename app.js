@@ -221,7 +221,7 @@ app.use("/listings", listingRoutes);
 app.use("/listings/:id/reviews", reviewRoutes);
 app.use("/", userRoutes);
 
-// Catch-all Route for 404 Errors
+// Catching all Route for 404 Errors
 app.all("*", (req, res, next) => {
   next(new ExpressError("Page Not Found", 404));
 });
@@ -241,3 +241,4 @@ const server=app.listen(port, () => {
 
 server.setTimeout(50000);
 server.keepAliveTimeout = 65000;
+
