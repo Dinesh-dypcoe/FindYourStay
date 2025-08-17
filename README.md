@@ -43,9 +43,9 @@ To get started with **FindYourStay**, follow these steps:
 
 ## Usage 🏨
 **FindYourStay** is useful for booking accommodations. Users can browse various listings, view details, and book their stay through the application.
+## Live Links 🌐
+- Render: [FindYourStay]([https://findyourstay.onrender.com/](https://findyourstay.onrender.com/listings))
 
-## Live Link 🌐
-Check out the live application here: [FindYourStay](https://findyourstay-iota.vercel.app/listings](https://findyourstay.onrender.com/)
 
 ## Contact 📬
 For any inquiries or feedback, please reach out to me at [dineshaher2505@gmail.com](mailto:dineshaher2505@gmail.com).
