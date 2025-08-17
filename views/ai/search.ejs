@@ -266,17 +266,18 @@
     <div class="examples-section">
         <h3><i class="fas fa-lightbulb"></i> Try these examples:</h3>
         <div class="example-queries">
-            <div class="example-query" onclick="setQuery('I need a luxury villa in Goa with a private beach, spa services, and gourmet kitchen for under ₹15k/night')">
-                "I need a luxury villa in Goa with a private beach, spa services, and gourmet kitchen for under ₹15k/night"
+            <div class="example-query" onclick="setQuery('Family-friendly apartment in Pune with gym, swimming pool, and kitchen facilities under ₹8k/night')">
+                "Family-friendly apartment in Pune with gym, swimming pool, and kitchen facilities under ₹8k/night"
+            </div>
+            <div class="example-query" onclick="setQuery('I need a luxury villa in Sri Lanka with a private beach, spa services, and gourmet kitchen for under ₹15k/night')">
+                "I need a luxury villa in Sri Lanka with a private beach, spa services, and gourmet kitchen for under ₹15k/night"
             </div>
             <div class="example-query" onclick="setQuery('Looking for a cozy mountain cabin near Manali with fireplace, wifi, and parking for 2 nights under ₹3k/night')">
                 "Looking for a cozy mountain cabin near Manali with fireplace, wifi, and parking for 2 nights under ₹3k/night"
             </div>
-            <div class="example-query" onclick="setQuery('Family-friendly apartment in Mumbai with gym, swimming pool, and kitchen facilities under ₹8k/night')">
-                "Family-friendly apartment in Mumbai with gym, swimming pool, and kitchen facilities under ₹8k/night"
-            </div>
-            <div class="example-query" onclick="setQuery('Budget-friendly hostel in Delhi with wifi and laundry facilities under ₹1k/night')">
-                "Budget-friendly hostel in Delhi with wifi and laundry facilities under ₹1k/night"
+            
+            <div class="example-query" onclick="setQuery('Budget-friendly stay in Lonavala with wifi and laundry facilities under ₹5k/night')">
+                "Budget-friendly stay in Lonavala with wifi and laundry facilities under ₹5k/night"
             </div>
         </div>
     </div>
@@ -310,5 +311,7 @@
     function setQuery(text) {
         document.getElementById('query').value = text;
         document.getElementById('query').focus();
+        // Automatically submit the form after setting the query
+        document.querySelector('.search-form').submit();
     }
 </script>
