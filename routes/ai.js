@@ -17,15 +17,17 @@ async function convertQueryToFilters(userQuery) {
         
         const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
-        const prompt = `You are an AI assistant that converts natural language travel queries into MongoDB filter objects for a hotel/accommodation database.
+        const prompt = `You are TravelBuddy.AI, an intelligent travel assistant that converts natural language travel queries into simple search filters.
 
-Given a user query, return ONLY a valid JSON object with MongoDB filters. The JSON should include:
+Given a user query, return ONLY a valid JSON object with these fields:
 
-- location: string (city/area name)
+- location: string (single city/area name, NOT an array or complex query)
 - amenities: array of strings (from: wifi, swimmingPool, airConditioning, kitchenFacilities, parkingSpace, laundryFacilities, gym, spaServices, outdoorSpace, conciergeServices)
 - price: object with $lte (less than or equal) for maximum price
 - duration: number (if mentioned)
 - activities: array of strings (if mentioned)
+
+IMPORTANT: Keep location as a simple string, not an array or complex MongoDB query.
 
 Example input: "I want a 3-day stay near Pune with a private pool, good Wi-Fi, and close to trekking spots under ₹5k/night"
 
@@ -55,7 +57,21 @@ Return ONLY the JSON object, no additional text or explanation.`;
                 cleanText = cleanText.replace(/^```\s*/, '').replace(/\s*```$/, '');
             }
             
-            return JSON.parse(cleanText);
+            const parsedFilters = JSON.parse(cleanText);
+            console.log("Gemini returned filters:", parsedFilters);
+            
+            // Validate that location is a simple string
+            if (parsedFilters.location && typeof parsedFilters.location !== 'string') {
+                console.log("Invalid location format from Gemini, converting to string:", parsedFilters.location);
+                // Convert complex location to simple string if possible
+                if (parsedFilters.location.$in && Array.isArray(parsedFilters.location.$in)) {
+                    parsedFilters.location = parsedFilters.location.$in[0]; // Take first location
+                } else if (typeof parsedFilters.location === 'object') {
+                    parsedFilters.location = JSON.stringify(parsedFilters.location);
+                }
+            }
+            
+            return parsedFilters;
         } catch (parseError) {
             console.error("Failed to parse Gemini response as JSON:", text);
             return null;
@@ -71,10 +87,34 @@ function buildMongoQuery(filters) {
     const query = {};
 
     if (filters.location) {
-        query.$or = [
-            { location: { $regex: filters.location, $options: 'i' } },
-            { country: { $regex: filters.location, $options: 'i' } }
-        ];
+        // Handle different types of location filters
+        if (typeof filters.location === 'string') {
+            // Simple string location - search in both location and country fields
+            query.$or = [
+                { location: { $regex: filters.location, $options: 'i' } },
+                { country: { $regex: filters.location, $options: 'i' } }
+            ];
+        } else if (filters.location.$in && Array.isArray(filters.location.$in)) {
+            // Array of locations - search for any of them
+            const locationQueries = [];
+            filters.location.$in.forEach(loc => {
+                if (typeof loc === 'string') {
+                    locationQueries.push(
+                        { location: { $regex: loc, $options: 'i' } },
+                        { country: { $regex: loc, $options: 'i' } }
+                    );
+                }
+            });
+            if (locationQueries.length > 0) {
+                query.$or = locationQueries;
+            }
+        } else if (filters.location.$regex) {
+            // Direct regex query
+            query.$or = [
+                { location: filters.location },
+                { country: filters.location }
+            ];
+        }
     }
 
     if (filters.price && filters.price.$lte) {
@@ -129,9 +169,17 @@ router.post("/search", wrapAsync(async (req, res) => {
 
         if (filters) {
             // Use structured filters from Gemini
-            const mongoQuery = buildMongoQuery(filters);
-            listings = await Listing.find(mongoQuery).populate('owner');
-            appliedFilters = filters;
+            try {
+                const mongoQuery = buildMongoQuery(filters);
+                console.log("MongoDB query:", JSON.stringify(mongoQuery, null, 2));
+                listings = await Listing.find(mongoQuery).populate('owner');
+                appliedFilters = filters;
+            } catch (queryError) {
+                console.error("Error building or executing MongoDB query:", queryError);
+                // Fallback to basic keyword search if query fails
+                listings = await performFallbackSearch(query);
+                appliedFilters = { fallback: true, query: query, error: "Query failed, using fallback search" };
+            }
         } else {
             // Fallback to basic keyword search
             listings = await performFallbackSearch(query);

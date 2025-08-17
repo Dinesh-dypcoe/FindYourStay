@@ -37,6 +37,264 @@
         <%- body %>
     </div>
     <%- include('../includes/footer') %>
+    
+    <!-- TravelBuddy.AI Floating Icon -->
+    <div id="travelbuddy-float" class="travelbuddy-float">
+        <div class="travelbuddy-icon" id="travelbuddy-icon">
+            <i class="fas fa-robot"></i>
+        </div>
+        <div class="travelbuddy-popup" id="travelbuddy-popup">
+            <div class="popup-header">
+                <h4><i class="fas fa-robot"></i> TravelBuddy.AI</h4>
+                <button class="close-popup" id="close-popup">&times;</button>
+            </div>
+            <div class="popup-content">
+                <p>👋 Hi there! I'm your AI travel companion!</p>
+                <p>Let me help you plan your perfect trip. Just tell me what you're looking for!</p>
+                <a href="/ai/search" class="plan-trip-btn">
+                    <i class="fas fa-magic"></i> Plan My Trip
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .travelbuddy-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+        }
+
+        .travelbuddy-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #4c5fd7, #6c63ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(76, 95, 215, 0.3), 0 0 20px rgba(76, 95, 215, 0.2);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .travelbuddy-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #6c63ff, #4c5fd7);
+            border-radius: 50%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .travelbuddy-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 12px 35px rgba(76, 95, 215, 0.4);
+        }
+
+        .travelbuddy-icon:active {
+            transform: scale(0.95);
+            transition: transform 0.1s ease;
+        }
+
+        .travelbuddy-icon:hover::before {
+            opacity: 1;
+        }
+
+        .travelbuddy-icon.spinning {
+            animation: spin 1s ease-in-out;
+        }
+
+        .travelbuddy-icon i {
+            color: white;
+            font-size: 2rem;
+        }
+
+        .travelbuddy-popup {
+            position: absolute;
+            bottom: 90px;
+            right: 0;
+            width: 320px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px) scale(0.8);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border: 1px solid #e1e5e9;
+        }
+
+        .travelbuddy-popup.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+        }
+
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            background: linear-gradient(135deg, #4c5fd7, #6c63ff);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .popup-header h4 {
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .close-popup {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: background-color 0.3s ease;
+        }
+
+        .close-popup:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .popup-content {
+            padding: 1.5rem;
+        }
+
+        .popup-content p {
+            margin: 0 0 1rem 0;
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .plan-trip-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #4c5fd7, #6c63ff);
+            color: white;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .plan-trip-btn:hover {
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(76, 95, 215, 0.3);
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 8px 25px rgba(76, 95, 215, 0.3);
+            }
+            50% {
+                box-shadow: 0 8px 25px rgba(76, 95, 215, 0.6);
+            }
+            100% {
+                box-shadow: 0 8px 25px rgba(76, 95, 215, 0.3);
+            }
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg) scale(1);
+            }
+            50% {
+                transform: rotate(180deg) scale(1.1);
+            }
+            100% {
+                transform: rotate(360deg) scale(1);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .travelbuddy-float {
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .travelbuddy-icon {
+                width: 60px;
+                height: 60px;
+            }
+
+            .travelbuddy-icon i {
+                font-size: 1.5rem;
+            }
+
+            .travelbuddy-popup {
+                width: 280px;
+                right: -20px;
+            }
+        }
+    </style>
+
+    <script>
+        // TravelBuddy.AI Floating Icon Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const travelbuddyIcon = document.getElementById('travelbuddy-icon');
+            const travelbuddyPopup = document.getElementById('travelbuddy-popup');
+            const closePopup = document.getElementById('close-popup');
+            let hasShown = false;
+
+            // Popup is closed by default - no automatic opening
+
+            // Toggle popup on icon click
+            travelbuddyIcon.addEventListener('click', function() {
+                if (!travelbuddyPopup.classList.contains('show')) {
+                    // Add spinning animation when opening
+                    travelbuddyIcon.classList.add('spinning');
+                    setTimeout(() => {
+                        travelbuddyIcon.classList.remove('spinning');
+                    }, 1000);
+                }
+                travelbuddyPopup.classList.toggle('show');
+            });
+
+            // Close popup on close button click
+            closePopup.addEventListener('click', function() {
+                travelbuddyPopup.classList.remove('show');
+            });
+
+            // Close popup when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!travelbuddyIcon.contains(event.target) && !travelbuddyPopup.contains(event.target)) {
+                    travelbuddyPopup.classList.remove('show');
+                }
+            });
+
+            // Hide popup after 10 seconds if not interacted with
+            setTimeout(() => {
+                if (travelbuddyPopup.classList.contains('show')) {
+                    travelbuddyPopup.classList.remove('show');
+                }
+            }, 10000);
+        });
+    </script>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="/js/script.js"></script>
 </body>
