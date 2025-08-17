@@ -1,0 +1,348 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .results-container {
+        max-width: 1200px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+    }
+
+    .results-header {
+        background: #ffffff;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2rem;
+    }
+
+    .results-title {
+        color: #4c5fd7;
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+
+    .results-count {
+        color: #666;
+        font-size: 1.1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .applied-filters {
+        background: #f8f9fa;
+        padding: 1.5rem;
+        border-radius: 10px;
+        border-left: 4px solid #4c5fd7;
+        margin-bottom: 1rem;
+    }
+
+    .filters-title {
+        font-weight: 600;
+        color: #4c5fd7;
+        margin-bottom: 1rem;
+        font-size: 1.2rem;
+    }
+
+    .filter-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .filter-tag {
+        background: #4c5fd7;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        font-weight: 500;
+    }
+
+    .filter-tag.fallback {
+        background: #ff6b6b;
+    }
+
+    .fallback-notice {
+        background: #fff3cd;
+        border: 1px solid #ffeaa7;
+        color: #856404;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .listings-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .listing-card {
+        background: #ffffff;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .listing-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .listing-image {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+    }
+
+    .listing-content {
+        padding: 1.5rem;
+    }
+
+    .listing-title {
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+    }
+
+    .listing-location {
+        color: #666;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .listing-price {
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #4c5fd7;
+        margin-bottom: 1rem;
+    }
+
+    .listing-amenities {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .amenity-tag {
+        background: #e3f2fd;
+        color: #1976d2;
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 500;
+    }
+
+    .listing-owner {
+        color: #888;
+        font-size: 0.9rem;
+        font-style: italic;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 3rem;
+        background: #ffffff;
+        border-radius: 15px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .no-results-icon {
+        font-size: 4rem;
+        color: #ccc;
+        margin-bottom: 1rem;
+    }
+
+    .no-results h3 {
+        color: #666;
+        margin-bottom: 1rem;
+    }
+
+    .no-results p {
+        color: #888;
+        margin-bottom: 2rem;
+    }
+
+    .back-btn {
+        background: #4c5fd7;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border-radius: 8px;
+        text-decoration: none;
+        display: inline-block;
+        transition: background-color 0.3s ease;
+    }
+
+    .back-btn:hover {
+        background: #3b4db3;
+        color: white;
+    }
+
+    .ai-badge {
+        background: linear-gradient(135deg, #4c5fd7, #6c63ff);
+        color: white;
+        padding: 0.25rem 0.75rem;
+        border-radius: 15px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        display: inline-block;
+        margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+        .results-container {
+            margin: 1rem;
+        }
+
+        .listings-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+        }
+
+        .results-title {
+            font-size: 1.5rem;
+        }
+
+        .filter-tags {
+            flex-direction: column;
+        }
+    }
+</style>
+
+<div class="results-container">
+    <div class="results-header">
+        <div class="ai-badge">
+            <i class="fas fa-robot"></i> AI Travel Concierge Results
+        </div>
+        
+        <h1 class="results-title">Search Results</h1>
+        <p class="results-count">
+            Found <strong><%= resultsCount %></strong> accommodation<%= resultsCount !== 1 ? 's' : '' %> for your query
+        </p>
+
+        <% if (appliedFilters) { %>
+            <div class="applied-filters">
+                <h3 class="filters-title">
+                    <i class="fas fa-filter"></i> Applied Filters:
+                </h3>
+                
+                <% if (appliedFilters.fallback) { %>
+                    <div class="fallback-notice">
+                        <i class="fas fa-info-circle"></i>
+                        AI processing was unavailable. Showing results from keyword search for: "<%= appliedFilters.query %>"
+                    </div>
+                <% } else { %>
+                    <div class="filter-tags">
+                        <% if (appliedFilters.location) { %>
+                            <span class="filter-tag">
+                                <i class="fas fa-map-marker-alt"></i> Location: <%= appliedFilters.location %>
+                            </span>
+                        <% } %>
+                        
+                        <% if (appliedFilters.price && appliedFilters.price.$lte) { %>
+                            <span class="filter-tag">
+                                <i class="fas fa-rupee-sign"></i> Max Price: ₹<%= appliedFilters.price.$lte.toLocaleString('en-IN') %>
+                            </span>
+                        <% } %>
+                        
+                        <% if (appliedFilters.amenities && appliedFilters.amenities.length > 0) { %>
+                            <% appliedFilters.amenities.forEach(amenity => { %>
+                                <span class="filter-tag">
+                                    <i class="fas fa-check"></i> <%= amenity.replace(/([A-Z])/g, ' $1').trim() %>
+                                </span>
+                            <% }) %>
+                        <% } %>
+                        
+                        <% if (appliedFilters.duration) { %>
+                            <span class="filter-tag">
+                                <i class="fas fa-calendar"></i> Duration: <%= appliedFilters.duration %> days
+                            </span>
+                        <% } %>
+                        
+                        <% if (appliedFilters.activities && appliedFilters.activities.length > 0) { %>
+                            <% appliedFilters.activities.forEach(activity => { %>
+                                <span class="filter-tag">
+                                    <i class="fas fa-hiking"></i> <%= activity %>
+                                </span>
+                            <% }) %>
+                        <% } %>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+
+    <% if (listings.length > 0) { %>
+        <div class="listings-grid">
+            <% listings.forEach(listing => { %>
+                <a href="/listings/<%= listing._id %>" class="listing-card">
+                    <img src="<%= listing.image.url %>" alt="<%= listing.title %>" class="listing-image">
+                    <div class="listing-content">
+                        <h3 class="listing-title"><%= listing.title %></h3>
+                        
+                        <div class="listing-location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <%= listing.location %>, <%= listing.country %>
+                        </div>
+                        
+                        <div class="listing-price">
+                            ₹<%= listing.price.toLocaleString('en-IN') %> / night
+                        </div>
+                        
+                        <% if (listing.amenities) { %>
+                            <div class="listing-amenities">
+                                <% Object.keys(listing.amenities).forEach(amenity => { %>
+                                    <% if (listing.amenities[amenity]) { %>
+                                        <span class="amenity-tag">
+                                            <i class="fas 
+                                                <% if (amenity === 'wifi') { %> fa-wifi 
+                                                <% } else if (amenity === 'gym') { %> fa-dumbbell 
+                                                <% } else if (amenity === 'swimmingPool') { %> fa-swimmer 
+                                                <% } else if (amenity === 'airConditioning') { %> fa-fan 
+                                                <% } else if (amenity === 'kitchenFacilities') { %> fa-utensils 
+                                                <% } else if (amenity === 'parkingSpace') { %> fa-car 
+                                                <% } else if (amenity === 'laundryFacilities') { %> fa-tshirt 
+                                                <% } else if (amenity === 'spaServices') { %> fa-spa 
+                                                <% } else if (amenity === 'outdoorSpace') { %> fa-tree 
+                                                <% } else if (amenity === 'conciergeServices') { %> fa-concierge-bell 
+                                                <% } %>"></i>
+                                            <%= amenity.replace(/([A-Z])/g, ' $1').trim() %>
+                                        </span>
+                                    <% } %>
+                                <% }) %>
+                            </div>
+                        <% } %>
+                        
+                        <% if (listing.owner) { %>
+                            <div class="listing-owner">
+                                Hosted by <%= listing.owner.username %>
+                            </div>
+                        <% } %>
+                    </div>
+                </a>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="no-results">
+            <div class="no-results-icon">
+                <i class="fas fa-search"></i>
+            </div>
+            <h3>No accommodations found</h3>
+            <p>We couldn't find any accommodations matching your criteria. Try adjusting your search terms or check out our other listings.</p>
+            <a href="/ai/search" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Try Another Search
+            </a>
+        </div>
+    <% } %>
+</div>

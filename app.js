@@ -34,6 +34,7 @@ const listingRoutes = require("./routes/listing");
 const reviewRoutes = require("./routes/review");
 const userRoutes = require("./routes/user");
 const accountRoutes = require('./routes/account');
+const aiRoutes = require('./routes/ai');
 
 
 main()
@@ -219,6 +220,7 @@ app.get("/", (req, res) => {
 
 app.use("/listings", listingRoutes);
 app.use("/listings/:id/reviews", reviewRoutes);
+app.use("/ai", aiRoutes);
 app.use("/", userRoutes);
 
 // Catching all Route for 404 Errors

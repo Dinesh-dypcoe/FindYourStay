@@ -135,7 +135,7 @@
     </script>
 
 <script>
-const pricePerNight = <%= listing.price %>;
+const pricePerNight = Number('<%= listing.price %>');
 const gstRate = 0.18; // 18% GST
 
 function calculateTotal() {
