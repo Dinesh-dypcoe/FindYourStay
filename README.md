@@ -43,8 +43,8 @@ To get started with **FindYourStay**, follow these steps:
 
 ## Usage 🏨
 **FindYourStay** is useful for booking accommodations. Users can browse various listings, view details, and book their stay through the application.
-## Live Links 🌐
-- Render: [FindYourStay]([https://findyourstay.onrender.com/](https://findyourstay.onrender.com/listings))
+## Live Link 🌐
+Check out the live application here: [FindYourStay](https://findyourstay.onrender.com/listings)
 
 
 ## Contact 📬
