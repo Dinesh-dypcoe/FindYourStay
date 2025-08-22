@@ -241,23 +241,23 @@
             <i class="fas fa-robot"></i>
         </div>
         <h1>TravelBuddy.AI</h1>
-        <p>Your personal AI travel companion! Tell us what you're looking for in natural language and let TravelBuddy.AI find the perfect accommodation for you!</p>
+        <p>Your personal AI travel companion! Get personalized accommodation recommendations AND discover amazing places to visit. Tell us what you're looking for!</p>
     </div>
 
     <form class="search-form" action="/ai/search" method="POST">
         <div class="form-group">
-            <label for="query" class="form-label">Describe your ideal stay:</label>
+            <label for="query" class="form-label">Describe your travel plans:</label>
             <textarea 
                 id="query" 
                 name="query" 
                 class="form-control" 
-                placeholder="e.g., I want a 3-day stay near Pune with a private pool, good Wi-Fi, and close to trekking spots under ₹5k/night"
+                placeholder="e.g., I want a 3-day stay near Pune with a pool and Wi-Fi under ₹5k/night, or: What are the best places to visit in Goa?, or: Plan me a 2-day trip to Jaipur with a budget hotel"
                 required
             ></textarea>
         </div>
         <div class="searchdiv">
             <button type="submit" class="ai-search-btn">
-                <i class="fas fa-search"></i> Find My Perfect Stay
+                <i class="fas fa-magic"></i> Plan My Perfect Trip
             </button>
         </div>
         
@@ -266,18 +266,26 @@
     <div class="examples-section">
         <h3><i class="fas fa-lightbulb"></i> Try these examples:</h3>
         <div class="example-queries">
-            <div class="example-query" onclick="setQuery('Family-friendly apartment in Pune with gym, swimming pool, and kitchen facilities under ₹8k/night')">
-                "Family-friendly apartment in Pune with gym, swimming pool, and kitchen facilities under ₹8k/night"
+            <div class="example-query" onclick="setQuery('I want a 3-day stay near Pune with a pool and Wi-Fi under ₹5k/night')">
+                "I want a 3-day stay near Pune with a pool and Wi-Fi under ₹5k/night"
             </div>
-            <div class="example-query" onclick="setQuery('I need a luxury villa in Sri Lanka with a private beach, spa services, and gourmet kitchen for under ₹15k/night')">
-                "I need a luxury villa in Sri Lanka with a private beach, spa services, and gourmet kitchen for under ₹15k/night"
+            <div class="example-query" onclick="setQuery('What are the best places to visit in Goa?')">
+                "What are the best places to visit in Goa?"
             </div>
-            <div class="example-query" onclick="setQuery('Looking for a cozy mountain cabin near Manali with fireplace, wifi, and parking for 2 nights under ₹3k/night')">
-                "Looking for a cozy mountain cabin near Manali with fireplace, wifi, and parking for 2 nights under ₹3k/night"
+            <div class="example-query" onclick="setQuery('Plan me a 2-day trip to Jaipur with a budget hotel')">
+                "Plan me a 2-day trip to Manali with a budget hotel"
             </div>
             
-            <div class="example-query" onclick="setQuery('Budget-friendly stay in Lonavala with wifi and laundry facilities under ₹5k/night')">
-                "Budget-friendly stay in Lonavala with wifi and laundry facilities under ₹5k/night"
+            <div class="example-query" onclick="setQuery('Family-friendly apartment in Mumbai with gym and swimming pool under ₹8k/night')">
+                "Family-friendly apartment in Pune with gym and swimming pool under ₹8k/night"
+            </div>
+            
+            <div class="example-query" onclick="setQuery('Show me hidden gems and food spots in Bangalore')">
+                "Show me hidden gems and food spots in Pune"
+            </div>
+            
+            <div class="example-query" onclick="setQuery('Luxury villa in Sri Lanka with private beach and spa services under ₹15k/night')">
+                "Luxury villa in Sri Lanka with private beach and spa services under ₹15k/night"
             </div>
         </div>
     </div>
@@ -292,17 +300,38 @@
         </div>
         <div class="feature-card">
             <div class="feature-icon">
-                <i class="fas fa-filter"></i>
+                <i class="fas fa-bed"></i>
             </div>
-            <div class="feature-title">Advanced Filtering</div>
-            <div class="feature-desc">Automatically filters by location, amenities, price, and activities</div>
+            <div class="feature-title">Perfect Stays</div>
+            <div class="feature-desc">Find accommodations with exact amenities, location, and budget requirements</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-star"></i>
+            </div>
+            <div class="feature-title">Amazing Attractions</div>
+            <div class="feature-desc">Discover must-visit places, hidden gems, and local recommendations</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-route"></i>
+            </div>
+            <div class="feature-title">Complete Planning</div>
+            <div class="feature-desc">Get both accommodation and attraction recommendations in one search</div>
         </div>
         <div class="feature-card">
             <div class="feature-icon">
                 <i class="fas fa-shield-alt"></i>
             </div>
-            <div class="feature-title">Fallback Search</div>
-            <div class="feature-desc">If AI processing fails, we fall back to smart keyword search</div>
+            <div class="feature-title">Smart Fallback</div>
+            <div class="feature-desc">If AI processing fails, we fall back to intelligent keyword search</div>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon">
+                <i class="fas fa-mobile-alt"></i>
+            </div>
+            <div class="feature-title">Mobile Friendly</div>
+            <div class="feature-desc">Optimized for all devices - plan your trip anywhere, anytime</div>
         </div>
     </div>
 </div>
