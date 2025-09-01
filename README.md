@@ -1,4 +1,6 @@
 # FindYourStay 🌍🏡
+## Live Link 🌐
+Check out the live application here: [FindYourStay](https://findyourstay.onrender.com/listings)
 
 ## Description
 I'm excited to share my latest project, **FindYourStay**, a full-stack web application that allows users to explore and book unique accommodations around the world. 🌎
@@ -26,8 +28,7 @@ I'm excited to share my latest project, **FindYourStay**, a full-stack web appli
 
 ## Usage 🏨
 **FindYourStay** is useful for booking accommodations. Users can browse various listings, view details, and book their stay through the application.
-## Live Link 🌐
-Check out the live application here: [FindYourStay](https://findyourstay.onrender.com/listings)
+
 
 
 ## Contact 📬
