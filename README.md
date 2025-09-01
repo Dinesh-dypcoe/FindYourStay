@@ -10,36 +10,19 @@ I'm excited to share my latest project, **FindYourStay**, a full-stack web appli
 - 🔍 **Advanced Search:** Search for properties based on location.
 - ⭐ **Reviews:** Users can leave reviews on listings.
 - 📱 **Responsive Design:** Fully responsive, ensuring a great experience on all devices.
+- AI Travel conceirge
 
-## Installation ⚙️
-To get started with **FindYourStay**, follow these steps:
+- ![Homepage Screenshot](./public/images/image1.png)
+![Listing details Screenshot](./public/images/image2.png)
+![Listing Details Screenshot](./public/images/image3.png)
+![TravelBuddy.AI Screenshot](./public/images/image4.png)
+![TravelBuddy.AI Screenshot](./public/images/image5.png)
+![Authentication page Screenshot](./public/images/image6.png)
 
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/yourusername/FindYourStay.git
-    ```
 
-2. Navigate into the project directory:
-    ```bash
-    cd FindYourStay
-    ```
 
-3. Install dependencies:
-    ```bash
-    npm install
-    ```
 
-4. Set up your environment variables. Create a `.env` file in the root directory and add the following:
-    ```
-    ATLASDB_URL=your_mongodb_connection_string
-    SECRET=your_secret_key
-    SESSION_SECRET=your_session_secret_key
-    ```
 
-5. Start the application:
-    ```bash
-    npm start
-    ```
 
 ## Usage 🏨
 **FindYourStay** is useful for booking accommodations. Users can browse various listings, view details, and book their stay through the application.
